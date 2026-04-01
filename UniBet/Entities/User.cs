@@ -7,7 +7,6 @@ namespace UniBet.Entities
         public string Document {  get; set; }
         public string Name { get; set; }
         public string Email { get; set; }
-        public string Password { get; set; }
         public Amount Amount { get; set; }
         public virtual List<Deposit> Deposits { get; set; }
 

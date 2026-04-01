@@ -8,14 +8,14 @@ namespace UniBet.Entities
         public decimal OddATeam { get; private set; }
         public decimal OddBTeam { get; private set; }
         public decimal OddHouse { get; private set; }
-        public string ATeam { get; private set; }
-        public string BTeam { get; private set; }
+        public Team ATeam { get; private set; }
+        public Team BTeam { get; private set; }
         public DateTime SortDate { get; private set; }
         public DateTime FinishDate { get; private set; }
         private List<Bet> _bets {  get; set; }
         public IReadOnlyCollection<Bet> Bets => _bets.AsReadOnly();
 
-        public Game(string name, string aTeam, string bTeam, 
+        public Game(string name, Team aTeam, Team bTeam, 
             decimal oddA, decimal oddB, decimal oddHouse, 
             DateTime sortDate, DateTime finishDate)
         {
@@ -24,12 +24,12 @@ namespace UniBet.Entities
                 throw new Exception("Nome invalido");
             }
 
-            if (string.IsNullOrEmpty(aTeam))
+            if (string.IsNullOrEmpty(aTeam.Value))
             {
                 throw new Exception("ATeam nulo!");
             }
 
-            if (string.IsNullOrEmpty(bTeam))
+            if (string.IsNullOrEmpty(bTeam.Value))
             {
                 throw new Exception("BTeam nulo!");
             }
