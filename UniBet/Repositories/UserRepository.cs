@@ -11,12 +11,25 @@ namespace UniBet.Repositories
         {
         }
 
+        public UserRepository(Context database)
+        {
+            _database = database;
+        }
+
         public User FindById(Guid userId)
         {
             User user = _database.Users
                 .Select(usr => usr)
                 .Where(usr => usr.Id == userId).FirstOrDefault();
 
+            return user;
+        }
+
+        public User Update(User user)
+        {
+            _database.Users.Update(user);
+            _database.SaveChanges();
+            
             return user;
         }
     }

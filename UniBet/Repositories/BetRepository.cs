@@ -1,6 +1,9 @@
-﻿namespace UniBet.Repositories;
+﻿using UniBet.Entities;
+using UniBet.Interfaces.IRepositories;
 
-public interface BetRepository
+namespace UniBet.Repositories;
+
+public interface BetRepository : IBetRepository
 {
-    
+    public Bet FindById(Guid id);
 }
