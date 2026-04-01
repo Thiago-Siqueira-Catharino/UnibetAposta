@@ -7,6 +7,7 @@ namespace UniBet.Entities
         
         public Guid UserId { get; set; }
         public Guid GameId { get; set; }
+        public bool Active { get; set; }
         public Amount Amount { get; set; }
         public Team Team { get; set; }
 
@@ -16,6 +17,7 @@ namespace UniBet.Entities
             this.Amount = amount;
             this.Team = team;
             this.GameId = gameId;
+            this.Active = true;
         }
     }
 }
