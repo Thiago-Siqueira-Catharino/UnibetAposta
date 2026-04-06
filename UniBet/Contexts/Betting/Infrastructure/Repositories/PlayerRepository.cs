@@ -1,17 +1,17 @@
-using UniBet.Data.Contexts;
-using UniBet.Entities;
-using UniBet.Interfaces.IRepositories;
+using UniBet.Contexts.Betting.Domain.Entities;
+using UniBet.Contexts.Betting.Domain.IRepositories;
+using UniBet.Contexts.Betting.Infrastructure.Persistance;
 
-namespace UniBet.Repositories
+namespace UniBet.Contexts.Betting.Infrastructure.Repositories
 {
-    public class UserRepository : IUserRepository
+    public class PlayerRepository : IPlayerRepository
     {
-        private readonly Context _database;
-        public UserRepository() 
+        private readonly BettingDbContext _database;
+        public PlayerRepository() 
         {
         }
 
-        public UserRepository(Context database)
+        public PlayerRepository(BettingDbContext database)
         {
             _database = database;
         }
