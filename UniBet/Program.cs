@@ -1,10 +1,10 @@
 using Microsoft.EntityFrameworkCore;
-using UniBet.Data.Contexts;
-using UniBet.Interfaces.IRepositories;
-using UniBet.Interfaces.IServices;
-using UniBet.Repositories;
-using UniBet.Services;
-using UniBet.UseCases;
+using UniBet.Contexts.Betting.Domain.IRepositories;
+using UniBet.Contexts.Betting.Application.UseCases;
+using UniBet.Contexts.Betting.Infrastructure.Persistance;
+using UniBet.Contexts.Betting.Infrastructure.Repositories;
+using UniBet.Contexts.Betting.Application.UseCases.GetBet;
+using UniBet.Contexts.Betting.Application.UseCases.CreateBet;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,12 +15,15 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddScoped<PlaceUseCase>();
-builder.Services.AddScoped<IUserService, UserService>();
-builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<CloseBetDTO>();
+builder.Services.AddScoped<GetBetUseCase>();
+builder.Services.AddScoped<CreateBetUseCase>();
+builder.Services.AddScoped<IBetRepository, BetRepository>();
+builder.Services.AddScoped<IPlayerRepository, PlayerRepository>();
+builder.Services.AddScoped<IGameRepository, GameRepository>();
 
 var connectionString = builder.Configuration.GetConnectionString("Default");
-builder.Services.AddDbContext<Context>(options =>
+builder.Services.AddDbContext<BettingDbContext>(options =>
     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString))
 );
 
