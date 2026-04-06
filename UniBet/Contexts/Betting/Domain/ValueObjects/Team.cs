@@ -1,4 +1,4 @@
-namespace UniBet.ValueObjects;
+namespace UniBet.Contexts.Betting.Domain.ValueObjects;
 
 public class Team
 {
