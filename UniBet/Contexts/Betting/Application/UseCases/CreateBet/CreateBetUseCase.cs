@@ -8,11 +8,11 @@ public class CreateBetUseCase
 {
     private readonly IPlayerRepository _userRepository;
     private readonly IGameRepository _gameRepository;
-    
+
     public CreateBetUseCase(IPlayerRepository playerRepository, IGameRepository gameRepository)
     {
         _userRepository = playerRepository;
-        _gameRepository = gameRepository;   
+        _gameRepository = gameRepository;
     }
 
     public void Run(CreateBetDTO request)
@@ -20,13 +20,13 @@ public class CreateBetUseCase
         try
         {
             Player player = _userRepository.FindById(request.UserId);
-            if (player == null) 
+            if (player == null)
             {
                 throw new Exception("User Invalido");
             }
 
             Game game = _gameRepository.FindById(request.GameId);
-            if (game == null) 
+            if (game == null)
             {
                 throw new Exception("Jogo Invalido");
             }
@@ -39,7 +39,7 @@ public class CreateBetUseCase
         }
         catch (Exception ex)
         {
-            throw new Exception(ex.Message);    
+            throw new Exception(ex.Message);
         }
     }
 }
