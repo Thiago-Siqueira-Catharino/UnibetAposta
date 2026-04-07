@@ -1,17 +1,33 @@
-﻿namespace UniBet.Contexts.Betting.Domain.ValueObjects
+namespace UniBet.Contexts.Betting.Domain.ValueObjects
 {
     public class Amount
     {
-        public decimal Value { get; set; }
+        public decimal Value { get; }
 
         public Amount(decimal value)
         {
             if (value <= 0)
-            {
-                throw new Exception("Valor nao pode ser negativo");
-            }
+                throw new Exception("Valor deve ser maior que zero");
 
-            this.Value = value;
+            Value = value;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj is not Amount other)
+                return false;
+
+            return Value == other.Value;
+        }
+
+        public override int GetHashCode()
+        {
+            return Value.GetHashCode();
+        }
+
+        public override string ToString()
+        {
+            return Value.ToString("F2");
         }
     }
 }
