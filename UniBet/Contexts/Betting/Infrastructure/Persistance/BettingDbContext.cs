@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using UniBet.Contexts.Betting.Domain.Entities;
+using UniBet.Contexts.Betting.Domain.ValueObjects;
 
 namespace UniBet.Contexts.Betting.Infrastructure.Persistance;
 
@@ -18,6 +19,13 @@ public class BettingDbContext : DbContext
         modelBuilder.Entity<Player>()
             .HasKey(usr => usr.Id);
 
+        modelBuilder.Entity<Player>()
+            .Property(u => u.Amount)
+            .HasConversion(
+                v => v.Value, // Conversão: Objeto -> String (Para o Banco)
+                v => new Amount(v) // Conversão: String -> Objeto (Para o C#)
+            );
+
         modelBuilder.Entity<Bet>()
             .HasKey(usr => usr.Id);
 
@@ -26,8 +34,36 @@ public class BettingDbContext : DbContext
             .WithMany(usr => usr.Bets)
             .HasForeignKey(bet => bet.UserId);
         
+        modelBuilder.Entity<Bet>()
+            .Property(u => u.Team)
+            .HasConversion(
+                v => v.Value, // Conversão: Objeto -> String (Para o Banco)
+                v => new Team(v) // Conversão: String -> Objeto (Para o C#)
+            );
+        
+        modelBuilder.Entity<Bet>()
+            .Property(u => u.Amount)
+            .HasConversion(
+                v => v.Value, // Conversão: Objeto -> String (Para o Banco)
+                v => new Amount(v) // Conversão: String -> Objeto (Para o C#)
+            );
+        
         modelBuilder.Entity<Game>()
             .HasKey(game  => game.Id);
+        
+        modelBuilder.Entity<Game>()
+            .Property(u => u.ATeam)
+            .HasConversion(
+                v => v.Value, // Conversão: Objeto -> String (Para o Banco)
+                v => new Team(v) // Conversão: String -> Objeto (Para o C#)
+            );
+        
+        modelBuilder.Entity<Game>()
+            .Property(u => u.BTeam)
+            .HasConversion(
+                v => v.Value, // Conversão: Objeto -> String (Para o Banco)
+                v => new Team(v) // Conversão: String -> Objeto (Para o C#)
+            );
         
         modelBuilder.Entity<Bet>()
             .HasOne(bet => bet.Game)
