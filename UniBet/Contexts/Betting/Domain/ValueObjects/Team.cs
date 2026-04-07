@@ -4,6 +4,10 @@ public class Team
 {
     public string Value { get; }
 
+    public Team()
+    {
+    }
+
     public Team(string value)
     {
         if (string.IsNullOrWhiteSpace(value))

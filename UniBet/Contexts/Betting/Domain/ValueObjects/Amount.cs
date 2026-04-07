@@ -4,6 +4,10 @@
     {
         public decimal Value { get; set; }
 
+        public Amount()
+        {
+        }
+
         public Amount(decimal value)
         {
             if (value <= 0)
