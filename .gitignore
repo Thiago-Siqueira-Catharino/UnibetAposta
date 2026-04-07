@@ -9,3 +9,6 @@ obj/
 
 #OS
 .DS_Store
+
+#Databases
+UniBet/Migrations/
