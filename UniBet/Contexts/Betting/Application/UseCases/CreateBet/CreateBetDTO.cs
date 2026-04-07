@@ -1,5 +1,3 @@
-using UniBet.Contexts.Betting.Domain.ValueObjects;
-
 namespace UniBet.Contexts.Betting.Application.UseCases;
 
 public class CreateBetDTO
@@ -11,6 +9,9 @@ public class CreateBetDTO
 
     public CreateBetDTO(Guid userId, Guid gameId, decimal amount, string team)
     {
-        
+        UserId = userId;
+        GameId = gameId;
+        Amount = amount;
+        Team = team;
     }
 }
