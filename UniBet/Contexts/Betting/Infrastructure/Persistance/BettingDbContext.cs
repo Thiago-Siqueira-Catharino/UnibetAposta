@@ -65,6 +65,11 @@ public class BettingDbContext : DbContext
                 v => new Team(v) // Conversão: String -> Objeto (Para o C#)
             );
         
+        modelBuilder.Entity<Game>()
+            .Navigation(g => g.Bets)
+            .HasField("_bets") // Nome exato do seu campo privado
+            .UsePropertyAccessMode(PropertyAccessMode.Field);
+        
         modelBuilder.Entity<Bet>()
             .HasOne(bet => bet.Game)
             .WithMany(game => game.Bets)

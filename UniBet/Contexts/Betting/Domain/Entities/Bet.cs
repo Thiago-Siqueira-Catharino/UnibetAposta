@@ -6,8 +6,8 @@ namespace UniBet.Contexts.Betting.Domain.Entities
     {
         public Player player { get; private set; }
         public Game Game { get; private set; }
-        public Guid UserId { get; set; }
-        public Guid GameId { get; set; }
+        public Guid UserId { get; private set; }
+        public Guid GameId { get; private set; }
         public bool Active { get; private set; }
         public Amount Amount { get; set; }
         public Team Team { get; set; }

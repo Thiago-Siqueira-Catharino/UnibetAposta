@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using UniBet.Contexts.Betting.Domain.IRepositories;
 using UniBet.Contexts.Betting.Application.UseCases;
+using UniBet.Contexts.Betting.Application.UseCases.CancelBet;
 using UniBet.Contexts.Betting.Infrastructure.Persistance;
 using UniBet.Contexts.Betting.Infrastructure.Repositories;
 using UniBet.Contexts.Betting.Application.UseCases.GetBet;
@@ -16,6 +17,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<CloseBetDTO>();
+builder.Services.AddScoped<CancelBetUseCase>();
 builder.Services.AddScoped<GetBetUseCase>();
 builder.Services.AddScoped<CreateBetUseCase>();
 builder.Services.AddScoped<IBetRepository, BetRepository>();

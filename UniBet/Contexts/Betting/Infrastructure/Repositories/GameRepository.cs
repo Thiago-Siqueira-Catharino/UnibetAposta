@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using UniBet.Contexts.Betting.Domain.Entities;
 using UniBet.Contexts.Betting.Domain.IRepositories;
 using UniBet.Contexts.Betting.Infrastructure.Persistance;
@@ -19,10 +20,9 @@ public class GameRepository : IGameRepository
     
     public Game FindById(Guid gameId)
     {
+        Console.WriteLine("O ID AQUI!" + gameId);
         Game game = _betRepository.Games
-            .Select(game => game)
-            .Where(game => game.Id == gameId)
-            .FirstOrDefault();
+            .FirstOrDefault(game => game.Id == gameId);
             
         return game;
     }

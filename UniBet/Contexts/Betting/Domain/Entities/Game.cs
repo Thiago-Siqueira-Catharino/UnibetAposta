@@ -17,7 +17,7 @@ namespace UniBet.Contexts.Betting.Domain.Entities
 
         public Game()
         {
-            
+            _bets = new List<Bet>();
         }
 
         public Game(string name, Team aTeam, Team bTeam, 

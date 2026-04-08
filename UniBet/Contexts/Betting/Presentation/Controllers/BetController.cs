@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using UniBet.Contexts.Betting.Application.UseCases;
+using UniBet.Contexts.Betting.Application.UseCases.CancelBet;
 using UniBet.Contexts.Betting.Application.UseCases.CreateBet;
 using UniBet.Contexts.Betting.Application.UseCases.GetBet;
 
@@ -9,13 +10,16 @@ namespace UniBet.Contexts.Betting.Presentation.Controllers;
 [Route("[controller]")]
 public class BetController : ControllerBase
 {
+    
     private readonly GetBetUseCase _getBetUseCase;
     private readonly CreateBetUseCase _createBetUseCase;
+    private readonly CancelBetUseCase _cancelBetUseCase;
 
-    public BetController(GetBetUseCase getBetUseCase,  CreateBetUseCase createBetUseCase)
+    public BetController(GetBetUseCase getBetUseCase,  CreateBetUseCase createBetUseCase,  CancelBetUseCase cancelBetUseCase)
     {
         _getBetUseCase = getBetUseCase;
         _createBetUseCase = createBetUseCase;
+        _cancelBetUseCase = cancelBetUseCase;
     }
     
     [HttpGet("{Id}")]
@@ -42,6 +46,20 @@ public class BetController : ControllerBase
         {
             _createBetUseCase.Run(newBet);
             return Ok("Created");
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
+    }
+
+    [HttpPost("CancelBet")]
+    public IActionResult CancelBet([FromQuery] Guid betId)
+    {
+        try
+        {
+            _cancelBetUseCase.Run(betId);
+            return Ok("Cancelled");
         }
         catch (Exception e)
         {

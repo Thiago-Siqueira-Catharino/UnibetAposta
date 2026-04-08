@@ -20,5 +20,10 @@ namespace UniBet.Contexts.Betting.Domain.Entities
 
             this.Amount.Value -= amount.Value;
         }
+        
+        public void Deposit(Amount amount)
+        {
+            this.Amount.Value += amount.Value;
+        }
     }
 }
